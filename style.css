@@ -1,0 +1,463 @@
+/* Reset e Stili Base */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+/* Stile per il layout della Home */
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    height: 80vh;
+    background: white; /* Resta bianco per il resto della home */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Logo a sinistra */
+.logo {
+    flex: 1;
+    background: #000; /* Rende il background del logo completamente nero */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+/* Navigazione a destra (verticale e centrata) */
+.navigation {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Resto del codice rimane invariato... */
+
+.navigation a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #333;
+    transition: transform 0.3s;
+}
+
+.navigation a:hover {
+    transform: scale(1.1);
+}
+
+/* Stile per il menu a scorrimento */
+.scroll-menu {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    overflow-x: auto;
+    max-width: 80vw;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-menu ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.scroll-menu li {
+    flex-shrink: 0;
+}
+
+.scroll-menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 8px 15px;
+    background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.scroll-menu a:hover {
+    background-color: #555;
+}
+
+/* 🌟 Stile per About, Contact e Post */
+.content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transform: translateX(50px);
+    animation: slideIn 1s forwards;
+}
+
+/* Effetto di Slide */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 🔹 ABOUT: Tre sezioni con immagini */
+.about-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about-section {
+    background: #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    width: 80%;
+    transition: transform 0.3s;
+}
+
+.about-section:hover {
+    transform: scale(1.05);
+}
+
+/* 🔹 CONTACT: Info membri con immagini */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    background: #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    width: 80%;
+}
+
+.contact-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+/* 🔹 POST: Macrocontenitori + Menu a Tendina */
+.post-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post-box {
+    background: #ddd;
+    padding: 20px;
+    width: 80%;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.post-box:hover {
+    transform: scale(1.05);
+}
+
+/* Menu a tendina */
+.dropdown {
+    display: none;
+    background: #eee;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.post-box.active + .dropdown {
+    display: block;
+}
+
+/* 🔹 Tasto "Torna alla Home" */
+.back-home {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    padding: 5px 10px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.back-home:hover {
+    background: #555;
+}
+
+/* 🌟 Tasto "Torna alla Home" */
+.back-home {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.back-home:hover {
+    background: #555;
+    transform: scale(1.1);
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Immagine tonda */
+.user img {
+    width: 80px;  /* Dimensione immagine */
+    height: 80px; /* Mantiene la proporzione */
+    border-radius: 50%; /* Rende l'immagine circolare */
+    object-fit: cover; /* Mantiene il rapporto dell'immagine */
+    border: 2px solid #333; /* Bordo sottile */
+}
+
+/* Macrocontenitori */
+.macrocontainer {
+    padding: 20px;
+    background: #f4f4f4;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.macrocontainer h2 {
+    font-size: 22px;
+    color: #333;
+}
+
+.macrocontainer:hover {
+    background: #e0e0e0;
+}
+
+/* Articoli nei macrocontenitori */
+.articles {
+    display: none;
+    margin-top: 10px;
+}
+
+article {
+    margin-bottom: 15px;
+}
+
+article h3 {
+    font-size: 20px;
+    color: #444;
+}
+
+/* Post Container */
+.post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+/* Macrocontenitori (Categorie) */
+.post-macro-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.macro {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.macro:hover {
+    background-color: #555;
+}
+
+/* Articoli */
+.post-article {
+    width: 80%;
+    margin-top: 20px;
+}
+
+.category {
+    display: none;
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.category h3 {
+    margin-top: 10px;
+    color: #000000;
+}
+
+.category p {
+    color: #555;
+}
+
+/* Tasto Torna alla Home */
+.back-home {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: #000000;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.back-home:hover {
+    background-color: #000000;
+}
+
+/* Stile per l'articolo */
+.article {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.article:hover {
+    transform: scale(1.02);
+}
+
+/* Titolo dell'articolo */
+.article-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.article-title img {
+    border-radius: 8px;
+}
+
+/* Descrizione dell'articolo */
+.article-description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Link dell'articolo */
+.article-link a {
+    font-size: 18px;
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.article-link a:hover {
+    color: #005bb5;
+}
+
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .logo {
+        width: 100%;
+        height: 100px;
+    }
+
+    .navigation {
+        justify-content: center;
+        padding: 20px;
+    }
+
+    /* Stile per la Home: Due parti */
+    .home-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+    }
+
+    .home-logo {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000000;
+        color: white;
+        height: 100%;
+        font-size: 2rem;
+    }
+
+    .home-sections {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .section a {
+        text-decoration: none;
+        color: #000000;
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+    }
+
+    .section a:hover {
+        background-color: #f0f0f0;
+    }
+}

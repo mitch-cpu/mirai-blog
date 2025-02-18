@@ -1,0 +1,106 @@
+/* Reset di base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo principale */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin-left: 1cm;
+    margin-right: 1cm;
+}
+
+/* Contenitore dell'articolo */
+.article-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Intestazione */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Sezioni dell'articolo */
+section {
+    margin-bottom: 30px;
+}
+
+section h2 {
+    font-size: 28px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+section p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+}
+
+/* Link Torna alla Home */
+footer .back-home {
+    font-size: 18px;
+    color: #e9db0f;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+footer .back-home:hover {
+    text-decoration: underline;
+}
+
+/* Stile per il corpo e il contenuto */
+.content {
+    max-width: 100%;
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 20px;
+}
+
+/* Abilitare il scroll se il contenuto supera l'altezza disponibile */
+.article-container {
+    overflow-y: scroll;
+    max-height: 90vh;
+    padding-right: 20px; /* Spazio per lo scroll */
+}
+
+/* Stile per immagini nei contenuti */
+article img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 20px;
+}

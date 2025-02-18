@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container post-container">
+        <div class="post-logo"><img src="./images/1.mov" width="150px"></div>
+        <div class="post-content">
+            <div class="post-macro-container">
+                <div class="macro" onclick="toggleArticles(1)">I Nostri Strumenti</div>
+                <div class="macro" onclick="toggleArticles(2)">I Nostri Progetti</div>
+                <div class="macro" onclick="toggleArticles(3)">i Nostri preferiti</div>
+                <div class="macro" onclick="toggleArticles(4)">Viaggia con Noi</div>
+            </div>
+            <div id="post-articles" class="post-article">
+                <h2>Articoli</h2>
+                <div id="category-1" class="category" style="display:none;">
+                    <h3><img src="./images/macbook.png" width="100" alt="MacBook Pro"></h3>
+                    <p>Controlla l'articolo -> <a href="./macbook.html">il nostro fidato laptop</a></p>
+                    <h3>Articolo 2 della Categoria 1</h3>
+                    <p>Contenuto dell'articolo 2 della categoria 1.</p>
+                </div>
+                <div id="category-2" class="category" style="display:none;">
+                    <h3><img src="./images/Unknown.jpeg" width="100" alt="japan"></h3>
+                    <p>Controlla l'articolo -> <a href="./japan.html">la terra dei nostri sogni</a></p>
+                    <h3><img src="./posts/tsushima/tsushima.jpeg" width="100" alt="japan"></h3>
+                    <p>Controlla l'articolo -> <a href="./article-tsushima.html">un isola che non ti aspetti</a></p>
+                </div>
+                <div id="category-3" class="category" style="display:none;">
+                    <h3>Articoli da viaggio consigliati</h3>
+                    <p>nei nostri viaggi non possiamo fare a meno di questi articoli, dai un occhiata!</p>
+                </div>
+                <div id="category-4" class="category" style="display:none;">
+                    <h3>questo articolo è ancora in fase di scrittura </h3>
+                    <p>ti basti sapere che la partenza è prevista per Ottobre!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="./index.html" class="back-home">Torna alla Home</a>
+    <script src="script.js"></script>
+</body>
+</html>
