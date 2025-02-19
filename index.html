@@ -163,6 +163,7 @@
                     <button class="post-comment">Invia</button>
                     <div class="comments"></div>
                 </div>
+                <button class="share-btn">Condividi</button>
             </div>
         </section>
     </main>
@@ -296,6 +297,27 @@
                     localStorage.setItem('users', JSON.stringify(users));
                 } else {
                     alert('Hai già messo un dislike a questo post');
+                }
+            });
+        });
+
+        document.querySelectorAll('.share-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const postTitle = this.closest('.post').querySelector('h3').textContent;
+                const postUrl = window.location.origin + this.closest('.post').querySelector('a').getAttribute('href');
+                const shareText = `Leggi questo articolo: ${postTitle} - ${postUrl}`;
+                if (navigator.share) {
+                    navigator.share({
+                        title: postTitle,
+                        text: shareText,
+                        url: postUrl
+                    }).then(() => {
+                        console.log('Articolo condiviso con successo');
+                    }).catch(err => {
+                        console.error('Errore nella condivisione:', err);
+                    });
+                } else {
+                    prompt('Copia questo link per condividere:', postUrl);
                 }
             });
         });
