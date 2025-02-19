@@ -3,49 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Blog con Feed e Dark Mode</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+            display: flex;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        #darkModeToggle {
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+        }
+        main {
+            width: 70%;
+            margin: 80px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        #quick-thoughts, #blog-feed {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        #quick-thoughts:hover, #blog-feed .post:hover {
+            transform: translateY(-5px);
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .comment-section {
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .dark-mode {
+            background-color: #222;
+            color: #f4f4f4;
+        }
+        .dark-mode header {
+            background-color: #333;
+        }
+        .dark-mode #quick-thoughts, .dark-mode #blog-feed, .dark-mode #sidebar {
+            background-color: #444;
+            color: #fff;
+        }
+        .like-dislike {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        #sidebar {
+            width: 25%;
+            position: fixed;
+            right: 0;
+            top: 80px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: calc(100% - 80px);
+            overflow-y: auto;
+        }
+        #loginModal, #signupModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1000;
+        }
+        #loginModal.active, #signupModal.active {
+            display: block;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+        #overlay.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Logo a sinistra -->
-        <div class="logo">
-            <img src="./images/1.mov" width="300px" alt="Logo">
-        </div>
-        
-        <!-- Navigazione a destra -->
-        <div class="navigation">
-            <a href="about.html">About</a>
-            <a href="post.html">Post</a>
-            <a href="contact.html">Contact</a>
-        </div>
+    <div id="overlay"></div>
+    <div id="loginModal">
+        <h2>Login</h2>
+        <input type="text" id="loginUsername" placeholder="Username">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button id="loginButton">Login</button>
+        <p>Non hai un account? <a href="#" id="showSignup">Registrati</a></p>
     </div>
-
-    <!-- Menu a scorrimento in basso a destra -->
-    <!-- <div class="scroll-menu">
-        <ul>
-            <li><a href="./macbook.html">macbook pro</a>
-                <section id="article1">
-                    <h3>portafogli mia sorella</h3>
-                    <p><img src="./images/macbook.png" width="50px" alt=""></p>
-                </section></li>
-            <li><a href="#article2">Articolo 2</a>
-                <section id="article2">
-                    <h2>Articolo 2</h2>
-                    <p>Contenuto dell'articolo 2...</p>
-                </section></li>
-            <li><a href="#article3">Articolo 3</a>
-                <section id="article3">
-                    <h2>Articolo 3</h2>
-                    <p>Contenuto dell'articolo 3...</p>
-                </section></li>
-            <li><a href="#article4">Articolo 4</a>
-                <section id="article4">
-                    <h2>Articolo 4</h2>
-                    <p>Contenuto dell'articolo 4...</p>
-                </section></li>
+    <div id="signupModal">
+        <h2>Registrati</h2>
+        <input type="text" id="signupUsername" placeholder="Username">
+        <input type="password" id="signupPassword" placeholder="Password">
+        <button id="signupButton">Registrati</button>
+        <p>Hai già un account? <a href="#" id="showLogin">Login</a></p>
+    </div>
+    <header>
+        <a href="./images/1.mov"></a>
+        <h1></h1>
+        <button id="darkModeToggle">🌙</button>
+    </header>
+    
+    <main>
+        <section id="quick-thoughts">
+            <h2>Pensieri Veloci</h2>
+            <textarea id="quickThoughtInput" placeholder="Scrivi un pensiero..."></textarea>
+            <button id="addThought">Pubblica</button>
+            <div id="thoughtsFeed"></div>
+        </section>
+        
+        <section id="blog-feed">
+            <h2>Ultimi Articoli</h2>
+            <div class="post">
+                <h3>TSUSHIMA</h3>
+                <p>l'isola che non ti aspetti..<a href="./article-tsushima.html">Leggi di più</a></p>
+                <div class="like-dislike">
+                    <button class="like-btn">👍 <span class="like-count">0</span></button>
+                    <button class="dislike-btn">👎 <span class="dislike-count">0</span></button>
+                </div>
+                <button class="comment-btn">Commenta</button>
+                <div class="comment-section hidden">
+                    <textarea class="comment-input" placeholder="Scrivi un commento..."></textarea>
+                    <button class="post-comment">Invia</button>
+                    <div class="comments"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <aside id="sidebar">
+        <h2>Vecchi Articoli</h2>
+        <ul id="old-posts">
+            <li><a href="./article-tsushima.html">Tsushima</a></li>
+            <li><a href="./japan.html">Giappone</a></li>
+            <li><a href="./macbook.html">Macbook</a></li>
         </ul>
-    </div> -->
+    </aside>
+    
+    <script>
+        document.getElementById('darkModeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        document.getElementById('addThought').addEventListener('click', function() {
+            let input = document.getElementById('quickThoughtInput');
+            if (input.value.trim() !== "") {
+                let thought = document.createElement('p');
+                thought.textContent = input.value;
+                document.getElementById('thoughtsFeed').prepend(thought);
+                input.value = "";
+            }
+        });
+
+        document.querySelectorAll('.comment-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.nextElementSibling.classList.toggle('hidden');
+            });
+        });
+
+        document.querySelectorAll('.post-comment').forEach(button => {
+            button.addEventListener('click', function() {
+                let input = this.previousElementSibling;
+                if (input.value.trim() !== "") {
+                    let comment = document.createElement('p');
+                    comment.textContent = input.value;
+                    this.nextElementSibling.appendChild(comment);
+                    input.value = "";
+                }
+            });
+        });
+
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const overlay = document.getElementById('overlay');
+
+        const SUPERUSER = {
+            username: 'mitch',
+            password: 'mitch'
+        };
+
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let currentUser = null;
+
+        document.getElementById('showSignup').addEventListener('click', function() {
+            loginModal.classList.remove('active');
+            signupModal.classList.add('active');
+        });
+
+        document.getElementById('showLogin').addEventListener('click', function() {
+            signupModal.classList.remove('active');
+            loginModal.classList.add('active');
+        });
+
+        document.getElementById('loginButton').addEventListener('click', function() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            // Implement login logic here
+            const user = users.find(user => user.username === username && user.password === password);
+            if (user || (username === SUPERUSER.username && password === SUPERUSER.password)) {
+                currentUser = user || SUPERUSER;
+                loginModal.classList.remove('active');
+                overlay.classList.remove('active');
+            } else {
+                alert('Credenziali non valide');
+            }
+        });
+
+        document.getElementById('signupButton').addEventListener('click', function() {
+            const username = document.getElementById('signupUsername').value;
+            const password = document.getElementById('signupPassword').value;
+            // Implement signup logic here
+            if (users.find(user => user.username === username)) {
+                alert('Username già esistente');
+            } else {
+                const newUser = { username, password, likes: {}, dislikes: {} };
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                alert('Registrazione completata');
+                signupModal.classList.remove('active');
+                loginModal.classList.add('active');
+            }
+        });
+
+        window.addEventListener('load', function() {
+            overlay.classList.add('active');
+            loginModal.classList.add('active');
+        });
+
+        document.querySelectorAll('.like-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                if (!currentUser) {
+                    alert('Devi essere loggato per mettere un like');
+                    return;
+                }
+                const postId = this.closest('.post').querySelector('h3').textContent;
+                if (!currentUser.likes[postId]) {
+                    currentUser.likes[postId] = true;
+                    this.querySelector('.like-count').textContent++;
+                    localStorage.setItem('users', JSON.stringify(users));
+                } else {
+                    alert('Hai già messo un like a questo post');
+                }
+            });
+        });
+
+        document.querySelectorAll('.dislike-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                if (!currentUser) {
+                    alert('Devi essere loggato per mettere un dislike');
+                    return;
+                }
+                const postId = this.closest('.post').querySelector('h3').textContent;
+                if (!currentUser.dislikes[postId]) {
+                    currentUser.dislikes[postId] = true;
+                    this.querySelector('.dislike-count').textContent++;
+                    localStorage.setItem('users', JSON.stringify(users));
+                } else {
+                    alert('Hai già messo un dislike a questo post');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
